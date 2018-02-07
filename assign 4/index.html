@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function myFunction() {
+    document.getElementById("name").innerHTML = "What's my name?";
+}
+</script>
+</head>
+
+<body>
+
+<h2>Assigment 4</h2>
+
+<p id="name">Emily</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+  
+
+
+</body>
+</html> 
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Favorite Vegetables</h2>
+
+  <p>One of my favorite veggies</p>
+
+  <p id="veggie"></p>
+
+<script>
+var veggie=["Corn","Potatoes","Califlower"];
+
+document.getElementById("veggie").innerHTML = veggie[1];
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<img id="myImage" onclick="changeImage()" src="pic_bulboff.gif" width="100" height="180">
+
+<p>Click the light bulb to turn on/off the light.</p>
+
+<script>
+function changeImage() {
+    var image = document.getElementById('myImage');
+    if (image.src.match("bulbon")) {
+        image.src = "https://www.w3schools.com/js/pic_bulboff.gif";
+    } else {
+        image.src = "https://www.w3schools.com/js/pic_bulbon.gif";
+    }
+}
+</script>
+
+</body>
+</html>
