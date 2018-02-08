@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by erandall96 (http://jsbin.com/kexofil/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="#home">Home</a>
+  <a href="#news">News</a>
+  <div class="dropdown">
+    <button class="dropbtn" onclick="myFunction()">Dropdown
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content" id="myDropdown">
+      <a href="#">Denver</a>
+      <a href="#">Biloxi</a>
+      <a href="#">Seattle</a>
+    </div>
+  </div> 
+</div>
+
+<h3>Some of my favorite cities </h3>
+<p>Click on the "Dropdown" link to see my favorite cities.</p>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+  }
+}
+</script>
+
+  
+</body>
+</html>
+<script type="text/javascript">
+var theone
+</script>
+<h3> Where do you like to go?</h3>
+<form name="tv">
+Washingtpn DC: <input type="radio" name="station" onClick="theone=0"><br>
+New York: <input type="radio" name="station" onClick="theone=1"><br>
+Las Vegas: <input type="radio" name="station" onClick="theone=2"><br>
+Los Angeles: <input type="radio" name="station" onClick="theone=3"><br>
+Atlanta:<input type="radio" name="station" onClick="theone=4"><br>
+</form>
+
+<script src="/wp-includes/js/addInput.js" language="Javascript" type="text/javascript"></script>
+<form method="POST">
+     <div id="dynamicInput">
+          Other<br><input type="text" name="myInputs[]">
+     </div>
+     <input type="button" value="Add another text input" onClick="addInput('dynamicInput');">
+</form>
+<h4> Map of my favorite place</h4>
+<body>
+  <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=-105.76424377039076%2C38.92267341855215%2C-104.15749328210951%2C40.16796869559235&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=10/39.5481/-104.9609">View Larger Map</a></small>
+</body>
