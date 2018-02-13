@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by erandall96 (http://jsbin.com/bumaba/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="MarmurAssignment6v3">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">]
+  </script>
+</head>
+  
+<body>
+  <div id="bodyContent">
+
+<h2>Click to see which one of the sentences disappears. </h2>
+
+<h3>Me???</h3>
+<h4>Or me?? </h4>
+
+<button id="button1">First click me</button>
+  <hr>
+  
+  
+  
+  <h2>Which is my favorite animal?</h2>
+
+<p>Wolves</p>
+<p id="test">Tigers</p>
+
+<button id="button2">Click me to find out</button>
+<hr>
+  
+  
+  
+  <h2>Which is true?</h2>
+
+<p class="classTest">Los Angeles is farther west than Reno.</p>
+<p>Humans can distinguish between over a trillion different smells.</p>
+
+<button id="button3">Click me to see which one is true.</button>
+<br><hr>
+  
+And for the grand finale....
+<button id="button4">Click me!</button>
+  
+  </div>
+  <p id="magic"></p>
+  
+<script id="jsbin-javascript">
+//button that hides h3
+$(document).ready(function(){
+    $("#button1").click(function(){
+        $("h3").hide();
+    });
+});
+
+//button that hides ids
+    $("#button2").click(function(){
+        $("#test").hide();
+    });
+
+//button that hides classes
+    $("#button3").click(function(){
+        $(".classTest").hide();
+    });
+
+//button that hides all
+$("#button4").click(function(){
+    $("#bodyContent").hide();
+  $("#magic").html("It's Magic");
+    });
+</script>
+</body>
+</html>
