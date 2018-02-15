@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by erandall96 (http://jsbin.com/xipetek/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="Assignment 7 - jQuery map layers - no sorting">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+  
+<style id="jsbin-css">
+img {
+  position: absolute;
+  left: 150px;
+  top: 0px;
+  z-index: -1;
+  display: none;
+}
+
+#container {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 750px;
+  height: 420px;
+  border: dotted;
+  border-width: 2px;
+}
+
+#menu {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 150px;
+  height: 420px;
+  background-color: orange;
+  padding-left: 5px;
+  font-size: small;
+}
+
+#menu h4 {
+  margin-bottom: 0px;
+}
+</style>
+</head>
+<body>
+<div id="container">  
+  
+  <div id="menu">
+    <h4 style="text-align: center">Map Layers</h4>
+    <input type="radio" name="basemap" value="0" checked>Topo basemap
+    <br>
+    <input type="radio" name="basemap" value="1">Street basemap
+    <br>
+
+    <hr>
+
+    <input type="checkbox" class="mapLayer" value="2"> Iowa Border
+    <br>
+    <input type="checkbox" class="mapLayer" value="3"> Loess Hills
+    <br>
+    <input type="checkbox" class="mapLayer" value="4"> Museums
+    <br>
+     <input type="checkbox" class="mapLayer" value="5"> Native American Lands
+    <br>
+  </div> <?-- end menu -->
+
+  <div id="maps">
+  <img id="map0" src="https://erandall96.github.io/LA458/images/basemapTopo.png"> 
+ <img id="map1" src="https://erandall96.github.io/LA458/images/basemapStreets.png">
+ <img id="map2" src="https://erandall96.github.io/LA458/images/iowaBorder.png"> 
+  <img id="map3" src="https://erandall96.github.io/LA458/images/loessHills.png">   
+  <img id="map4" src="https://erandall96.github.io/LA458/images/museums.png">
+  <img id="map5" src="https://erandall96.github.io/LA458/images/nativeAmericanLands.png"> 
+  
+  </div> <?-- end maps -->
+</div> <?-- end container -->
+  
+<script id="jsbin-javascript">
+console.clear();
+
+$(function() {
+
+  var totalMaps = 5; //enter this manually
+
+  //initially hide all maps
+  for (i = 0; i < totalMaps; i++) {
+    $("#map" + i).hide();
+  }
+
+  //show the base map
+  $("#map0").show();
+
+  //toggle basemap layers
+  $('input:radio[name=basemap]').click(function() {
+    base = $('input:radio[name=basemap]:checked').val();
+    $("#map0, #map1").hide(); //combined selectors in one line
+    $("#map" + base).show();
+  });
+
+  
+  $(".mapLayer").change(function() {
+    x = $(this).val();
+    console.log("toggled map" + x);
+    $("#map" + x).toggle();
+  });
+
+});
+
+
+</script>
+</body>
+</html>
