@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by erandall96 (http://jsbin.com/meluvav/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="Assignment 8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" /> <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+  
+<style id="jsbin-css">
+#map {
+     width: 500px;
+     height: 400px;
+     background-color: tan;
+}
+</style>
+</head>
+<body>
+<div id='map'></div>
+  <br>
+  Pan to <a href="javascript:west4th()">West 4th ST Sioux City, IA</a><br>
+  
+  <a href="#" id='zoomOut'>Zoom out to level 8</a><br>
+  
+  <button id="Ames">Visit Ames, Iowa</button>
+  
+<script id="jsbin-javascript">
+var map = L.map('map').setView([42.0, -93.634], 12);
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/go/T9o_9PHQQ--">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([42.492324, -96.345649]).addTo(map)
+   .bindPopup("Emily Randall's childhood home")
+   .openPopup();
+
+//----Adding multiple town markers--
+
+//a array list of towns
+var towns = [[42.4966815,-96.4058782,"Sioux City"],
+    [42.4737805,-96.4135909,"South Sioux City"], 
+  [42.0267703,-93.6170554,"Ames"]
+  
+];
+   
+//loop through the array and add a marker for each
+
+for (var i = 0; i < towns.length; i++) {
+marker = new L.marker([towns[i][0],towns[i][1]])
+.bindPopup(towns[i][2])
+.addTo(map);
+}
+for (var i = 0; i < towns.length; i++) {
+  marker = new L.marker([towns[i][0],towns[i][1]])
+  .bindPopup(towns[i][2])
+  .addto(map); 
+}
+//-----Links below the Map----
+//Pan to West4
+function west4th() {
+  map.panTo(new L.LatLng(42.49,-96.41));
+}
+//set Zoom
+$("#zoomOut").click(function(){
+  map.setZoom(8);
+});
+//Ames Iowa
+ $("#Ames").click(function(){
+  map.setView(new L.LatLng(42.03,-93.62));
+});                   
+</script>
+</body>
+</html>
