@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by erandall96 (http://jsbin.com/nobubex/4/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+  <head>
+<meta name="description" content="Assignment 11a" />
+
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+	
+	<script> src="http://leaflet-extras.github.io/leaflet-providers/preview/#filter=Esri"type="text/javascript"</script>
+  <style id="jsbin-css">
+		
+		#map {
+			width: 600px;
+			height: 400px;
+		}
+</style>
+</head>
+  <body>
+<div id="map"></div>
+  <script id="jsbin-javascript">
+var cities = L.layerGroup();
+
+	L.marker([38.8147,-77.1121]).bindPopup('Alexandria,Virginia').addTo(cities),
+	L.marker([38.8938,-77.1765]).bindPopup('Washington DC').addTo(cities),
+	L.marker([38.9319,-77.1767]).bindPopup('McLean, Virginia').addTo(cities),
+	L.marker([38.7768,-77.1767]).bindPopup('Springfield,Virginia').addTo(cities);
+
+
+var polygon = L.polygon([
+				[38.914902, -77.991651],
+				[38.948102, -77.048292],
+				[38.986472, -77.136183],
+				[38.091706, -77.035597]
+],{
+			
+				color: 'purple',
+				fillColor: 'purple',
+				fillOpacity: 0.5,
+	
+});
+																								
+
+
+	var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+
+	var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+      streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+
+
+
+var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+	maxZoom: 16
+});
+
+
+var Esri_DeLorme = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Copyright: &copy;2012 DeLorme',
+	minZoom: 1,
+	maxZoom: 11
+});
+
+
+
+	var map = L.map('map', {
+		center: [38.8181, -77.0415],
+		zoom: 7,
+		layers: [grayscale, cities]
+	});
+
+	var baseLayers = {
+		"Streets": streets,
+		 "DeLorme":Esri_DeLorme,
+		"NatGeo Map":Esri_NatGeoWorldMap,
+	};
+
+	var overlays = {
+		"Forests": cities,
+		"Polygon": polygon
+	};
+
+	L.control.layers(baseLayers, overlays).addTo(map);
+</script>
+</body>
+</html>
