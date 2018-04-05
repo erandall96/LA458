@@ -1,0 +1,11 @@
+var Museums=[
+[38.89783, -77.02386,"Smithsonian"],
+[38.89673,	-77.02585,"Ford's Theatre"],
+[38.88664,	-77.03275,	"United State Holocast Memorial Museum"],
+[38.88814,	-77.01952,	"National Air and Space Museum"],
+[38.89124,	-77.03000,	"Museum of Natural History"],
+[38.88818,	-77.01657,	"Museum of American Indians"],
+[38.90003,	-77.02927,	"Museum of Women in Arts"],
+[38.89124,	-977.03000,	"Museum of American History"],
+[38.88817,	-77.02295,	"Hishorn Museum"],
+];
