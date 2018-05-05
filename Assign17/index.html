@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by erandall96 (http://jsbin.com/jixebok/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+
+  <head>
+    <meta name="description" content="Assignment 17">
+    <title>Leaflet Cluster Plugin</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css" />
+
+    <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
+    <script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+
+    <script src="https://leaflet.github.io/Leaflet.markercluster/example/realworld.388.js"></script>
+
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+		
+		
+  <script	 src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js">
+    </script>	
+		
+	<script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"></script>	
+
+
+  <style id="jsbin-css">
+html, body, #map {
+    height: 600px;
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+
+  <body>
+
+    <div id="map"></div>
+    
+
+  <script id="jsbin-javascript">
+		var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		    maxZoom: 18,
+		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+		  }),
+		  latlng = L.latLng(-37.82, 175.24);
+
+		var map = L.map('map', {
+		  center: latlng,
+		  zoom: 13,
+		  layers: [osm]
+		});
+
+		var markers = L.markerClusterGroup();
+		var singleMarkers = L.layerGroup([]);
+
+		for (var i = 0; i < addressPoints.length; i++) {
+		  var a = addressPoints[i];
+		  var title = a[2];
+		  var marker = L.marker(new L.LatLng(a[0], a[1]), {
+		    title: title
+		  });
+		  marker.bindPopup(title);
+		  markers.addLayer(marker);
+		  singleMarkers.addLayer(marker);
+		}
+
+		map.addLayer(singleMarkers);
+
+
+		//layer control
+
+		var baseMaps = {
+		  "OSM": osm
+		};
+
+		var overlayMaps = {
+		  "Single markers": singleMarkers,
+		  "Cluster": markers
+
+		};
+
+
+		L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+console.clear();
+
+var myArray = [];
+var max = 100;
+var min = 1;
+var map;
+
+//Base Layers
+var OSM = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 18
+});
+
+var Stamen_TonerLines = L.tileLayer('http://{s}.tile.stamen.com/toner-lines/{z}/{x}/{y}.png', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20
+});
+
+//create the map
+map = L.map('map', {
+    		center: new L.LatLng(42.03, -93.65),
+    		zoom: 16,
+    		layers: [Stamen_TonerLines]
+		});
+
+//The syntax of your data should be as follows
+dataArray = [[42.0289013234053, -93.6510745435953, 5], [42.027954, -93.655733, 0.3], [42.02889, -93.651887, 5], [42.0303482614262, -93.651982806623, 5], [42.0303482614262, -93.651982806623, 20]];
+
+
+
+
+//create random points around the college of design
+
+for (i = 0; i < 200; i++) { 
+	x = -93.655 + (Math.random() / 100);
+	y = 42.025 + (Math.random() / 100);
+	z = Math.floor(Math.random() * (max - min + 1)) + min;
+	myArray.push([y, x, z]);
+    
+}
+console.log(myArray);
+
+
+//optionally if you want to use the  linked realworld.10000.js file
+//myArray = addressPoints.map(function (p) { return [p[0], p[1]]; });
+
+
+var heatMap1 = L.heatLayer(myArray, {
+	minOpacity: 0.1, //the minimum opacity the heat will start at
+	maxZoom: 19, //zoom level where the points reach maximum intensity (as intensity scales with zoom), equals maxZoom of the map by default
+	max: 1.0, //maximum point intensity, 1.0 by default
+	radius: 25, //radius of each "point" of the heatmap, 25 by default
+	blur: 15, //amount of blur, 15 by default
+	gradient: {
+			0.2: 'yellow', 
+			0.65: 'lime', 
+			1: 'red'
+	} //color gradient config, e.g. {0.4: 'blue', 0.65: 'lime', 1: 'red'}	
+}).addTo(map);
+
+
+
+//note colors below are provided in RGB and alpha/transparency format.
+
+var heatMap2 = L.heatLayer(myArray, {
+	minOpacity: 0.1, 
+	maxZoom: 19, 
+	max: 1.0,
+	radius: 18, 
+	blur: 15,
+	gradient: {
+			0.1: 'rgba(255, 0, 0, 0.10)',
+			0.2: 'rgba(255, 0, 0, 0.20)',
+			0.3: 'rgba(255, 0, 0, 0.30)',
+			0.4: 'rgba(255, 0, 0, 0.40)',
+			0.5: 'rgba(255, 0, 0, 0.50)',
+			0.6: 'rgba(255, 0, 0, 0.60)',
+			0.7: 'rgba(255, 0, 0, 0.70)',
+			0.8: 'rgba(255, 0, 0, 0.80)',
+			0.9: 'rgba(255, 0, 0, 0.90)',
+			1.0: 'rgba(255, 255, 0, 0.9)' //yellow
+	} //color gradient config, e.g. {0.4: 'blue', 0.65: 'lime', 1: 'red'}	
+});
+
+
+
+
+//layer control
+var baseMaps = {
+	"OpenStreetMap": OSM,
+	"Stamen Toner Lines": Stamen_TonerLines
+};
+
+var overlayMaps = {
+	//"Heat Map 1": heat1,
+	"Heat Map1": heatMap1,
+	"Heat Map2": heatMap2
+};
+
+
+</script>
+</body>
+
+</html>
+
